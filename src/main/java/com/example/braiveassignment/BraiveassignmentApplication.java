@@ -26,6 +26,7 @@ public class BraiveassignmentApplication implements CommandLineRunner {
 
         FlightsEntity flightsEntity=new FlightsEntity();
         flightsEntity.setDeparture("Athens");
+        flightsEntity.setDestination("Stockholm");
         flightsEntity.setArrivalTime(LocalDateTime.now());
         flightsEntity.setScheduledTime(LocalDateTime.now().minusHours(2));
         flightsEntity.setDuration(ChronoUnit.HOURS.between(flightsEntity.getScheduledTime(),flightsEntity.getArrivalTime()));
