@@ -1,7 +1,6 @@
 package com.example.braiveassignment.Model;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
@@ -15,7 +14,7 @@ public class FlightsEntity {
     private String departure;
     private String destination;
     private double fare;
-    private double duration;
+    private long duration;
 
     @Id
     @GeneratedValue
@@ -31,7 +30,7 @@ public class FlightsEntity {
     }
 
     @Basic
-    @Column(name = "NAME")
+    @Column(name = "NAME", nullable = false)
     public String getName() {
         return name;
     }
@@ -41,7 +40,7 @@ public class FlightsEntity {
     }
 
     @Basic
-    @Column(name = "NUMBER")
+    @Column(name = "NUMBER", nullable = false)
     public String getNumber() {
         return number;
     }
@@ -51,7 +50,7 @@ public class FlightsEntity {
     }
 
     @Basic
-    @Column(name = "scheduledTime")
+    @Column(name = "scheduledTime", nullable = false)
     public LocalDateTime getScheduledTime() {
         return scheduledTime;
     }
@@ -61,7 +60,7 @@ public class FlightsEntity {
     }
 
     @Basic
-    @Column(name = "arrivalTime")
+    @Column(name = "arrivalTime", nullable = false)
     public LocalDateTime getArrivalTime() {
         return arrivalTime;
     }
@@ -71,7 +70,7 @@ public class FlightsEntity {
     }
 
     @Basic
-    @Column(name = "DEPARTURE")
+    @Column(name = "DEPARTURE", nullable = false)
     public String getDeparture() {
         return departure;
     }
@@ -81,7 +80,7 @@ public class FlightsEntity {
     }
 
     @Basic
-    @Column(name = "DESTINATION")
+    @Column(name = "DESTINATION", nullable = false)
     public String getDestination() {
         return destination;
     }
@@ -91,7 +90,7 @@ public class FlightsEntity {
     }
 
     @Basic
-    @Column(name = "FARE")
+    @Column(name = "FARE", nullable = false)
     public double getFare() {
         return fare;
     }
@@ -101,12 +100,12 @@ public class FlightsEntity {
     }
 
     @Basic
-    @Column(name = "DURATION")
-    public double getDuration() {
+    @Column(name = "DURATION", nullable = false)
+    public long getDuration() {
         return duration;
     }
 
-    public void setDuration(double duration) {
+    public void setDuration(long duration) {
         this.duration = duration;
     }
 

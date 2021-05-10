@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -34,6 +35,12 @@ public class BraiveassignmentApplication implements CommandLineRunner {
         flightsEntity.setName("A342");
         flightsEntity.setNumber("345");
 
-        service.saveFlight(flightsEntity);
+        try {
+            service.saveFlight(flightsEntity);
+        }
+        catch (DataIntegrityViolationException e)
+        {
+            System.out.println("All fields must be completed except duration!!");;
+        }
     }
 }
