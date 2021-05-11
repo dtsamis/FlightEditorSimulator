@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Flight editor</title>
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+</head>
+<body>
+<h1>Flights</h1>
+<a href="/create"><button>Add a Flight</button></a>
+<table class="table-responsive-md table-striped table"  >
+    <tr>
+        <!--<td>ID</td>-->
+        <td>Name</td>
+        <td>Number</td>
+        <td>Scheduled Time</td>
+        <td>Arrival Time</td>
+        <td>Departure</td>
+        <td>Destination</td>
+        <td>Fare</td>
+        <td>Duration</td>
+    </tr>
+
+
+    <tr th:each="flight:${flights}" th:insert="fragments::flightDisplay">
+
+
+
+
+            </tr>
+
+</table>
+
+</body>
+</html>

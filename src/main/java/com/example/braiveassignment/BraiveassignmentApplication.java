@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 @SpringBootApplication
-public class BraiveassignmentApplication implements CommandLineRunner {
+public class BraiveassignmentApplication  {
 @Autowired
     FlightService service;
    public static void main(String[] args) {
@@ -21,7 +21,7 @@ public class BraiveassignmentApplication implements CommandLineRunner {
 
 
 
-    @Override
+    /*@Override
     public void run(String... args) throws Exception {
 
 
@@ -42,5 +42,5 @@ public class BraiveassignmentApplication implements CommandLineRunner {
         {
             System.out.println("All fields must be completed except duration!!");;
         }
-    }
+    }*/
 }

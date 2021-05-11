@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Flight editor</title>
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+</head>
+<body>
+<h1>Flight Editor</h1>
+
+<form   th:action="@{/edit}" th:object="${flight}" method="post">
+    <p style="display: none">ID:<<input type="number" th:field="*{id}" th:value="${flight.id}" /></p>
+    <p>Flight Name: <input type="text" th:field="*{name}" th:value="${flight.name}" /></p>
+    <p>Flight Number: <input type="text" th:field="*{number}" th:value="${flight.number}" /></p>
+    <p>Scheduled Time: <input type="datetime-local" th:field="*{scheduledTime}" th:value="${flight.scheduledTime}"/></p>
+    <p>Arrival Time: <input type="datetime-local" th:field="*{arrivalTime}" th:value="${flight.arrivalTime}" /></p>
+    <p>Departure: <input type="text" th:field="*{departure}" th:value="${flight.departure}"/></p>
+    <p>Destination: <input type="text" th:field="*{destination}" th:value="${flight.destination}"/> </p>
+   <p>Fare: <input type="text" th:field="*{fare}" th:value="${flight.fare}"/></p>
+
+    <p><input type="submit" value="Submit" /> </p>
+</form>
+
+</body>
+
+</html>
+

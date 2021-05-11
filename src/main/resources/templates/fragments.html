@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet" >
+    <link rel="stylesheet" href="../static/css/style.css" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+    <title>Fragments</title>
+</head>
+<body>
+
+
+<!--<tr th:each="legend:${legends}">-->
+
+<tr th:fragment="flightDisplay">
+    <!--<td th:text="${flight.id}">Flight ID</td>-->
+    <td th:text="${flight.name}">Flight Name</td>
+    <td th:text="${flight.number}">Flight Number</td>
+    <td th:datetime="${flight.scheduledTime}">Scheduled Time</td>
+    <td th:datetime="${flight.arrivalTime}">Arrival Time</td>
+    <td th:text="${flight.departure}">Departure</td>
+    <td th:text="${flight.destination}">Destination</td>
+    <td th:text="${flight.fare}">Fare</td>
+    <td th:text="${flight.duration}">Duration</td>
+    <td><a th:href="@{'/edit/'+${flight.id}}"><button>Edit</button></a></td>
+</tr>
+
+
+
+<!--</tr>-->
+
+
+</body>
+</html>

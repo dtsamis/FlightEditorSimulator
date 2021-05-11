@@ -9,6 +9,8 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.List;
+
 @Service
 public class FlightService {
 
@@ -26,6 +28,16 @@ public class FlightService {
     public void saveFlight(FlightsEntity flightsEntity)
     {
         flightRepository.save(flightsEntity);
+    }
+
+    public FlightsEntity findById(Integer id)
+    {
+        return flightRepository.findById(id).get();
+    }
+
+    public List<FlightsEntity> findAll()
+    {
+        return flightRepository.findAll();
     }
 
    public static void main(String[] args)

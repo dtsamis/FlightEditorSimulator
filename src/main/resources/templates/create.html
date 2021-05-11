@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Flight creator</title>
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+</head>
+<body>
+<h1>Flight Creator</h1>
+
+<form  th:action="@{/create}" th:object="${flight} " method="post">
+
+
+    <p>Flight Name: <input type="text" th:field="*{name}"  /></p>
+    <p>Flight Number: <input type="text" th:field="*{number}" /></p>
+    <p>Scheduled Time: <input type="datetime-local" th:field="*{scheduledTime}"  /></p>
+    <p>Arrival Time: <input type="datetime-local" th:field="*{arrivalTime}" /></p>
+    <p>Departure: <input type="text" th:field="*{departure}"/></p>
+    <p>Destination: <input type="text" th:field="*{destination}"/></p>
+    <p>Fare: <input type="text" th:field="*{fare}"/></p>
+
+
+    <p><input type="submit" value="Submit" /> </p>
+</form>
+
+</body>
+
+</html>
+
