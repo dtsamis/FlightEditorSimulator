@@ -3,6 +3,9 @@ package com.example.braiveassignment.services;
 import com.example.braiveassignment.Model.FlightsEntity;
 import com.example.braiveassignment.repositories.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -20,25 +23,40 @@ public class FlightService {
     public FlightRepository getRepository() {
         return flightRepository;
     }
+
     @Autowired
     public void setRepository(FlightRepository flightRepository) {
         this.flightRepository = flightRepository;
     }
 
-    public void saveFlight(FlightsEntity flightsEntity)
-    {
+    public void saveFlight(FlightsEntity flightsEntity) {
         flightRepository.save(flightsEntity);
     }
 
-    public FlightsEntity findById(Integer id)
-    {
+    public FlightsEntity findById(Integer id) {
         return flightRepository.findById(id).get();
     }
 
-    public List<FlightsEntity> findAll()
-    {
+    public List<FlightsEntity> findAll() {
         return flightRepository.findAll();
     }
+
+    public FlightsEntity search(String name, String departure, String destination, LocalDateTime scheduled, int pageNumber, int rowPerPage) {
+        return flightRepository.findFirstByNameAndDepartureAndDestinationAndScheduledTime(name, departure, destination, scheduled).get();
+    }
+
+    public void deleteById(Integer id) {
+        flightRepository.deleteById(id);
+    }
+
+    public Page<FlightsEntity> findPaginated(int pageNumber, int pageSize)
+
+    {
+        Pageable pageable = PageRequest.of(pageNumber-1,pageSize);
+        return flightRepository.findAll(pageable);
+
+    }
+
 
    public static void main(String[] args)
    {

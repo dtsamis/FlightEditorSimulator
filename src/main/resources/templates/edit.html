@@ -9,8 +9,8 @@
 <body>
 <h1>Flight Editor</h1>
 
-<form   th:action="@{/edit}" th:object="${flight}" method="post">
-    <p style="display: none">ID:<<input type="number" th:field="*{id}" th:value="${flight.id}" /></p>
+<form   th:action="@{/create}" th:object="${flight}" method="post">
+    <input type="hidden" th:field="*{id}"  />
     <p>Flight Name: <input type="text" th:field="*{name}" th:value="${flight.name}" /></p>
     <p>Flight Number: <input type="text" th:field="*{number}" th:value="${flight.number}" /></p>
     <p>Scheduled Time: <input type="datetime-local" th:field="*{scheduledTime}" th:value="${flight.scheduledTime}"/></p>

@@ -22,7 +22,8 @@
     <td th:text="${flight.destination}">Destination</td>
     <td th:text="${flight.fare}">Fare</td>
     <td th:text="${flight.duration}">Duration</td>
-    <td><a th:href="@{'/edit/'+${flight.id}}"><button>Edit</button></a></td>
+    <td><a th:href="@{/edit/{id}(id=${flight.id})}"><button>Edit</button></a></td>
+    <td><a th:href="@{/delete/{id}(id=${flight.id})}"><button>Delete</button></a></td>
 </tr>
 
 
