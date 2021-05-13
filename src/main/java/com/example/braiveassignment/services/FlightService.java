@@ -41,8 +41,10 @@ public class FlightService {
         return flightRepository.findAll();
     }
 
-    public FlightsEntity search(String name, String departure, String destination, LocalDateTime scheduled, int pageNumber, int rowPerPage) {
-        return flightRepository.findFirstByNameAndDepartureAndDestinationAndScheduledTime(name, departure, destination, scheduled).get();
+    public Page<FlightsEntity> search(String name, String departure, String destination, LocalDateTime scheduled, int pageNumber, int pageSize) {
+
+        Pageable pageable =PageRequest.of(pageNumber-1,pageSize);
+        return flightRepository.findByNameOrDepartureOrDestinationOrScheduledTime(name, departure, destination, scheduled,pageable);
     }
 
     public void deleteById(Integer id) {
@@ -56,6 +58,24 @@ public class FlightService {
         return flightRepository.findAll(pageable);
 
     }
+/*
+    public Page<FlightsEntity> findByName(String name,Pageable pageable)
+    {
+        return flightRepository.findByName(name,pageable);
+    }
+    public Page<FlightsEntity> findByScheduledTime(LocalDateTime dateTime,Pageable pageable)
+    {
+        return flightRepository.findByScheduledTime(dateTime,pageable);
+    }
+    public Page<FlightsEntity> findByDeparture(String departure, Pageable pageable)
+    {
+        return flightRepository.findByDeparture(departure,pageable);
+    }
+    public Page<FlightsEntity> findByDestination(String destination, Pageable pageable)
+    {
+        return flightRepository.findByDestination(destination, pageable);
+    }*/
+
 
 
    public static void main(String[] args)

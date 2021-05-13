@@ -16,8 +16,8 @@
     <!--<td th:text="${flight.id}">Flight ID</td>-->
     <td th:text="${flight.name}">Flight Name</td>
     <td th:text="${flight.number}">Flight Number</td>
-    <td th:datetime="${flight.scheduledTime}">Scheduled Time</td>
-    <td th:datetime="${flight.arrivalTime}">Arrival Time</td>
+    <td th:text="${#temporals.format(flight.scheduledTime,'dd-MM-yyyy HH:mm')}">Scheduled Time</td>
+    <td th:text="${#temporals.format(flight.arrivalTime,'dd-MM-yyyy HH:mm')}">Scheduled Time</td>
     <td th:text="${flight.departure}">Departure</td>
     <td th:text="${flight.destination}">Destination</td>
     <td th:text="${flight.fare}">Fare</td>

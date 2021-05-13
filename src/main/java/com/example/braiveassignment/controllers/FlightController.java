@@ -1,24 +1,31 @@
 package com.example.braiveassignment.controllers;
 
 import com.example.braiveassignment.Model.FlightsEntity;
+import com.example.braiveassignment.Model.SearchCriteria;
 import com.example.braiveassignment.services.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class FlightController {
     @Autowired
     private FlightService service;
-    @RequestMapping(
+    /*@RequestMapping(
             method={RequestMethod.POST,RequestMethod.GET,RequestMethod.PUT}
-    )
+    )*/
+
+
 
     @GetMapping(path="/")
     public String getAll(Model model)
@@ -31,18 +38,7 @@ public class FlightController {
                              BindingResult result)
     {
 
-
-        FlightsEntity storedFlight= service.findById(flight.getId());
-        storedFlight.setDestination(flight.getDestination());
-        storedFlight.setNumber(flight.getNumber());
-        storedFlight.setName(flight.getName());
-        storedFlight.setDuration(flight.getDuration());
-        storedFlight.setFare(flight.getFare());
-        storedFlight.setDeparture(flight.getDeparture());
-        storedFlight.setScheduledTime(flight.getScheduledTime());
-        storedFlight.setArrivalTime(flight.getArrivalTime());
-        service.saveFlight(storedFlight);
-
+        service.saveFlight(flight);
         return "success_edit";
     }
 
@@ -106,11 +102,46 @@ public class FlightController {
 
     }
 
-/*    @GetMapping(path="/success")
+    @GetMapping(path="/search")
+    public String initSearch(Model model)
+    {
+
+        SearchCriteria search=new SearchCriteria();
+
+        model.addAttribute("search",search);
+
+        return "search";
+    }
+
+
+    @PostMapping(path="/search")
+    public String showResults(
+                              @RequestParam(defaultValue = "1") int pageNumber,
+                              @RequestParam(defaultValue="2") int pageSize,
+                              @ModelAttribute SearchCriteria search, Model model,
+                              BindingResult result)
+    {
+
+
+            Page<FlightsEntity> pageFlights=service.search(search.getName(),search.getDeparture(),search.getDestination(),search.getScheduledTime(),pageNumber,pageSize);
+        List<FlightsEntity> flights=pageFlights.getContent();
+        model.addAttribute("currentPage",pageNumber);
+        model.addAttribute("totalPages",pageFlights.getTotalPages());
+        model.addAttribute("totalFlights",pageFlights.getTotalElements());
+        model.addAttribute("flights",flights);
+            return "searchresult";
+
+    }
+
+
+    @GetMapping(path="/success")
     public String showSuccess()
     {
         return "success";
-    }*/
+    }
+
+
+
 }
 
 
