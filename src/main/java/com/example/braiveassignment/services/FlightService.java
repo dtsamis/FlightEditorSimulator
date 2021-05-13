@@ -3,12 +3,17 @@ package com.example.braiveassignment.services;
 import com.example.braiveassignment.Model.FlightsEntity;
 import com.example.braiveassignment.repositories.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.List;
+
 @Service
 public class FlightService {
 
@@ -18,15 +23,60 @@ public class FlightService {
     public FlightRepository getRepository() {
         return flightRepository;
     }
+
     @Autowired
     public void setRepository(FlightRepository flightRepository) {
         this.flightRepository = flightRepository;
     }
 
-    public void saveFlight(FlightsEntity flightsEntity)
-    {
+    public void saveFlight(FlightsEntity flightsEntity) {
         flightRepository.save(flightsEntity);
     }
+
+    public FlightsEntity findById(Integer id) {
+        return flightRepository.findById(id).get();
+    }
+
+    public List<FlightsEntity> findAll() {
+        return flightRepository.findAll();
+    }
+
+    public Page<FlightsEntity> search(String name, String departure, String destination, LocalDateTime scheduled, int pageNumber, int pageSize) {
+
+        Pageable pageable =PageRequest.of(pageNumber-1,pageSize);
+        return flightRepository.findByNameOrDepartureOrDestinationOrScheduledTime(name, departure, destination, scheduled,pageable);
+    }
+
+    public void deleteById(Integer id) {
+        flightRepository.deleteById(id);
+    }
+
+    public Page<FlightsEntity> findPaginated(int pageNumber, int pageSize)
+
+    {
+        Pageable pageable = PageRequest.of(pageNumber-1,pageSize);
+        return flightRepository.findAll(pageable);
+
+    }
+/*
+    public Page<FlightsEntity> findByName(String name,Pageable pageable)
+    {
+        return flightRepository.findByName(name,pageable);
+    }
+    public Page<FlightsEntity> findByScheduledTime(LocalDateTime dateTime,Pageable pageable)
+    {
+        return flightRepository.findByScheduledTime(dateTime,pageable);
+    }
+    public Page<FlightsEntity> findByDeparture(String departure, Pageable pageable)
+    {
+        return flightRepository.findByDeparture(departure,pageable);
+    }
+    public Page<FlightsEntity> findByDestination(String destination, Pageable pageable)
+    {
+        return flightRepository.findByDestination(destination, pageable);
+    }*/
+
+
 
    public static void main(String[] args)
    {

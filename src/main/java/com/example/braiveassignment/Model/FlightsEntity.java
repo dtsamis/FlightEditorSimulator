@@ -1,5 +1,7 @@
 package com.example.braiveassignment.Model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -9,7 +11,9 @@ public class FlightsEntity {
     private Integer id;
     private String name;
     private String number;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime scheduledTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime arrivalTime;
     private String departure;
     private String destination;
@@ -17,7 +21,7 @@ public class FlightsEntity {
     private long duration;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     public Integer getId() {
         return id;
