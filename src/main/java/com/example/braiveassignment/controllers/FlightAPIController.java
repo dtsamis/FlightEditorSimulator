@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -64,8 +65,8 @@ public class FlightAPIController {
     @PostMapping(path="/api/add")
     public void createFlight(@RequestParam String name,
                            @RequestParam String number,
-                           @RequestParam LocalDateTime scheduledTime,
-                           @RequestParam LocalDateTime arrivalTime,
+                           @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")LocalDateTime scheduledTime,
+                           @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")LocalDateTime arrivalTime,
                            @RequestParam String departure,
                            @RequestParam String destination,
                            @RequestParam Double fare
@@ -93,7 +94,7 @@ public class FlightAPIController {
 
 
 
-    @GetMapping(path="/api/delete")
+    @DeleteMapping(path="/api/delete")
     public void deleteFlight(@RequestParam int id)
     {
         service.deleteById(id);
