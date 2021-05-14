@@ -14,6 +14,9 @@ import org.springframework.stereotype.Component;
 @Component
 @Builder
 @Slf4j
+/***
+ * This class is used for initializing the administrator and a normal user with the corresponding roles
+ */
 public class UserDataLoader implements CommandLineRunner {
 
     private final AuthorityRepository authorityRepository;

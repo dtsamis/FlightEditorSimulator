@@ -23,6 +23,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    /***
+     * This method configures access to the various api points.
+     * In this application it restricts user creation to the administrator only.
+     * All the other operations are allowed only after login for any user
+     */
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests(authorize->{authorize.antMatchers("/api/register*").hasRole("ADMIN");})
                 .authorizeRequests()

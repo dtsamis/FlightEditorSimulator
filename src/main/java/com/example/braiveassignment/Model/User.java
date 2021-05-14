@@ -2,10 +2,10 @@ package com.example.braiveassignment.Model;
 
 import lombok.*;
 
-import javax.annotation.processing.Generated;
+
 import javax.persistence.*;
 import java.util.Set;
-
+//Using Lombok boilerplate code is created during compilation
 @Entity
 @Getter
 @Setter

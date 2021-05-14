@@ -12,6 +12,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+/***
+ * The repository that provides all the JPA entities operation for flights
+ * Pageable is used for most of the methods as results pagination is desired.
+ */
 @Repository
 public interface FlightRepository extends JpaRepository<FlightsEntity,Integer> {
     Optional<FlightsEntity> findById(Integer id);

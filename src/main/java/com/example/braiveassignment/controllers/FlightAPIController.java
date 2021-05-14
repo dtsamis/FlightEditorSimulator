@@ -21,16 +21,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/***
+ * The main API controller of the application
+ * It contains all the url mappings and methods for the actions a user can take
+ */
 @RestController
 public class FlightAPIController {
     @Autowired
     private FlightService service;
 
 
-
-    
-
-
+    /***
+     * The user can update a flight by giving its id, all the other parameters are optional
+     * @param id
+     * @param name
+     * @param number
+     * @param scheduledTime
+     * @param arrivalTime
+     * @param departure
+     * @param destination
+     * @param fare
+     */
     @PostMapping(path="/api/update")
     public void editFlight(@RequestParam int id,
                              @RequestParam(required = false) String name,
@@ -62,6 +73,17 @@ public class FlightAPIController {
 
     }
 
+    /***
+     * The user can add a flight only when all field values have been given.
+     * The id filed is not included since it is geneated by database
+     * @param name
+     * @param number
+     * @param scheduledTime
+     * @param arrivalTime
+     * @param departure
+     * @param destination
+     * @param fare
+     */
     @PostMapping(path="/api/add")
     public void createFlight(@RequestParam String name,
                            @RequestParam String number,
@@ -93,7 +115,10 @@ public class FlightAPIController {
     }
 
 
-
+    /***
+     * The user can delete a flihght by giving its id
+     * @param id
+     */
     @DeleteMapping(path="/api/delete")
     public void deleteFlight(@RequestParam int id)
     {
@@ -101,6 +126,18 @@ public class FlightAPIController {
 
     }
 
+    /***
+     * The user can search for all flights that satisfy a combination of fields.
+     * The result is a union of the different searches.
+     * All parameters are optional
+     * @param name
+     * @param departure
+     * @param destination
+     * @param scheduled
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
     @GetMapping(path="/api/search")
     public ResponseEntity <Map<String,Object>> findPaginated(@RequestParam(required = false) String name,
                                                              @RequestParam(required =false) String departure,
@@ -129,6 +166,13 @@ catch (Exception e)
     }
     }
 
+    /***
+     * The user can see all the flights displayed in pages.
+     * If the user does not give page number and size, default values are applied
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
     @GetMapping(path="/api/showAll")
     public ResponseEntity<Map<String,Object>> showAll(
                                                              @RequestParam(defaultValue = "1") int pageNumber,
