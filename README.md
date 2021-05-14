@@ -33,8 +33,14 @@ Add flight: /api/add   ..Required parameters :name,number,destination,departure,
 "The Id is given by the database"
 
 
-Caution!!
+##Caution!!
 The dates parameters should be given in the format "yyyy-MM-dd'T'HH:mm"
+
+
+###There are things that can be improved for certain but this is just the first prototype version of the application.
+
+###Spring Security has been applied since it provides good encryption with BCryptPasswordEncoder and can easily configured for more user roles and authorities.
+
 
 
 
