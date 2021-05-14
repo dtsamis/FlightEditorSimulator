@@ -2,6 +2,9 @@ package com.example.braiveassignment.Model;
 
 import java.time.LocalDateTime;
 
+/***
+ * This is a class modeling the fields of the search form
+ */
 public class SearchCriteria {
 
     private String name;

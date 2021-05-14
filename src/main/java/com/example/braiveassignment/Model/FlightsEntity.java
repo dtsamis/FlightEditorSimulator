@@ -11,7 +11,7 @@ public class FlightsEntity {
     private Integer id;
     private String name;
     private String number;
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") //A specific format is given for avoiding parsing errors
     private LocalDateTime scheduledTime;
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime arrivalTime;

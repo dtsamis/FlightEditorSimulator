@@ -16,6 +16,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
+/***
+ * This is the controller for all internal calls executed when user uses the graphical interface
+ */
 @Controller
 public class FlightController {
     @Autowired
@@ -25,13 +28,26 @@ public class FlightController {
     )*/
 
 
-
+    /***
+     * Since thymeleaf is used as a template engine, a model variable is required for passing values between calls
+     * This url is the home url and displays the list of all flihgts
+     * as well as the buttons that can be used for CRUD operations
+     * @param model
+     * @return
+     */
     @GetMapping(path="/")
     public String getAll(Model model)
     {
         return findPaginated(1,model);
     }
 
+    /***
+     * This url is used for updating a flight.
+     * @param flight
+     * @param model
+     * @param result
+     * @return
+     */
     @PostMapping(path="/edit")
     public String editFlight(@ModelAttribute FlightsEntity flight, Model model,
                              BindingResult result)
@@ -41,6 +57,13 @@ public class FlightController {
         return "success_edit";
     }
 
+    /***
+     * This is the url used for getting the data of the update form
+     * @param flight
+     * @param model
+     * @param result
+     * @return
+     */
     @GetMapping(path="/edit")
     public String getFlightInfo(@ModelAttribute FlightsEntity flight, Model model, BindingResult result)
     {
@@ -48,18 +71,31 @@ public class FlightController {
         model.addAttribute("flight",flight);
         return "edit";
     }
+
+    /***
+     * This is the url used for creating a flight
+     * @param flight
+     * @param model
+     * @param result
+     * @return
+     */
     @PostMapping(path="/create")
     public String createFlight(@ModelAttribute FlightsEntity flight, Model model,
                                BindingResult result)
     {
 
-
+        //Duration is calculated automatically
         flight.setDuration(ChronoUnit.HOURS.between(flight.getScheduledTime(),flight.getArrivalTime()));
         service.saveFlight(flight);
 
         return "success_creation";
     }
 
+    /***
+     * This url provides an empty form for adding the fields when creating a  new flight
+     * @param model
+     * @return
+     */
     @GetMapping(path="/create")
     public String initFlight(Model model)
     {
@@ -71,6 +107,13 @@ public class FlightController {
         return "create";
     }
 
+    /***
+     * This is the url that takes the field values of a flight with a specific id
+     * and displays them as default values im the update windows
+     * @param model
+     * @param id
+     * @return
+     */
     @GetMapping(path="/edit/{id}")
     public String getFlight( Model model, @PathVariable(value="id") int id)
     {
@@ -79,6 +122,13 @@ public class FlightController {
         return "edit";
     }
 
+    /***
+     * This is the url when user wants to delete a flight
+     * Deletion is done by using id as parameter.
+     * @param model
+     * @param id
+     * @return
+     */
     @GetMapping(path="/delete/{id}")
     public String deleteFlight(Model model, @PathVariable(value="id") int id)
     {
@@ -86,6 +136,12 @@ public class FlightController {
         return "success_delete";
     }
 
+    /***
+     * This is a helper method that offers pagination for the results
+     * @param pageNumber
+     * @param model
+     * @return
+     */
     @GetMapping(path="/page/{pageNumber}")
     public String findPaginated(@PathVariable(value="pageNumber") int pageNumber, Model model)
     {
@@ -101,6 +157,11 @@ public class FlightController {
 
     }
 
+    /***
+     * this is the url that gives an empty search form to the user
+     * @param model
+     * @return
+     */
     @GetMapping(path="/search")
     public String initSearch(Model model)
     {
@@ -112,7 +173,16 @@ public class FlightController {
         return "search";
     }
 
-
+    /***
+     * this is the url that does the actual search.
+     * Search results are shown as a union of the individual searches.
+     * @param pageNumber
+     * @param pageSize
+     * @param search
+     * @param model
+     * @param result
+     * @return
+     */
     @PostMapping(path="/search")
     public String showResults(
                               @RequestParam(defaultValue = "1") int pageNumber,
@@ -132,7 +202,10 @@ public class FlightController {
 
     }
 
-
+    /***
+     * This is the url for succesful results
+     * @return
+     */
     @GetMapping(path="/success")
     public String showSuccess()
     {

@@ -14,6 +14,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 
+/***
+ * This is the service that provides the operations for handling most flight data operations
+ */
 @Service
 public class FlightService {
 

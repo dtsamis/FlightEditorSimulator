@@ -21,6 +21,9 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 @Service
+/***
+ * This is a custom implementation of user details service
+ */
 public class FlightUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
 
