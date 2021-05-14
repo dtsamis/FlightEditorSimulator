@@ -20,9 +20,7 @@ public class FlightService {
 
     private FlightRepository flightRepository;
 
-    public FlightRepository getRepository() {
-        return flightRepository;
-    }
+
 
     @Autowired
     public void setRepository(FlightRepository flightRepository) {
@@ -58,25 +56,6 @@ public class FlightService {
         return flightRepository.findAll(pageable);
 
     }
-/*
-    public Page<FlightsEntity> findByName(String name,Pageable pageable)
-    {
-        return flightRepository.findByName(name,pageable);
-    }
-    public Page<FlightsEntity> findByScheduledTime(LocalDateTime dateTime,Pageable pageable)
-    {
-        return flightRepository.findByScheduledTime(dateTime,pageable);
-    }
-    public Page<FlightsEntity> findByDeparture(String departure, Pageable pageable)
-    {
-        return flightRepository.findByDeparture(departure,pageable);
-    }
-    public Page<FlightsEntity> findByDestination(String destination, Pageable pageable)
-    {
-        return flightRepository.findByDestination(destination, pageable);
-    }*/
-
-
 
    public static void main(String[] args)
    {
