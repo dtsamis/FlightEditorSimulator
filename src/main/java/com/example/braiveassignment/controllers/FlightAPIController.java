@@ -31,7 +31,7 @@ public class FlightAPIController {
     
 
 
-    @PostMapping(path="/api/edit")
+    @PostMapping(path="/api/update")
     public void editFlight(@RequestParam int id,
                              @RequestParam(required = false) String name,
                              @RequestParam(required = false) String number,
