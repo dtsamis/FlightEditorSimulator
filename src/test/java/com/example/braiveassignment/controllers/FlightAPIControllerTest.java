@@ -85,7 +85,7 @@ class FlightAPIControllerTest {
         long initialCount= flightRepository.count();
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/delete").param("id","1").with(httpBasic("Admin","adminPass")));
         assertEquals(flightRepository.count(),initialCount-1);
-        assertEquals(flightRepository.findById(1).isEmpty(),true);
+        assertEquals(flightRepository.findById(1).isPresent(),false);
     }
 
     @Test
