@@ -1,4 +1,4 @@
-#This is a webApplication for Handling flights information
+#This is a webApplication for handling flights information
 
 It consists of two separate services, one that offers a front end user interface where the user can easily find and change flights data and one that provides API service endpoints
 that can be used for retrieving and updating information about flights
