@@ -3,6 +3,7 @@ package com.example.braiveassignment.controllers;
 import com.example.braiveassignment.Model.FlightsEntity;
 import com.example.braiveassignment.TestUtility;
 import com.example.braiveassignment.repositories.FlightRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-
+@Slf4j
 @SpringBootTest
 class FlightAPIControllerTest {
     MockMvc mockMvc;
@@ -68,24 +69,25 @@ class FlightAPIControllerTest {
     }
 
     @Test
-    @Transactional
+
     void WhenAFlightIsAddedNumberOfFlightsIncreaseByOneAndCorrectValuesAreEntered() throws Exception
     {
         long initialCount= flightRepository.count();
         mockMvc.perform(MockMvcRequestBuilders.post("/api/add").params(params()).with(httpBasic("Admin", "adminPass")));
         assertEquals(flightRepository.count(),initialCount+1);
-        assertEquals(flightRepository.findByName("SAS",pageable).getContent().get(0).getDeparture(),"Paris");
+        assertEquals(flightRepository.findByName("SAS",pageable).getContent().get(0).getDeparture(),"Berlin");
 
     }
     @Test
-    @Transactional
+
     void WhenAFlightIsDeletedNumberOfFlightsDecreaseByOne() throws Exception
     {
         mockMvc.perform(MockMvcRequestBuilders.post("/api/add").params(params()).with(httpBasic("Admin", "adminPass")));
+        Integer flightId =flightRepository.findByName("SAS",pageable).getContent().get(0).getId();
         long initialCount= flightRepository.count();
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/delete").param("id","1").with(httpBasic("Admin","adminPass")));
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/delete").param("id",flightId.toString()).with(httpBasic("Admin","adminPass")));
         assertEquals(flightRepository.count(),initialCount-1);
-        assertEquals(flightRepository.findById(1).isEmpty(),true);
+        log.debug("Number of Flights now: "+flightRepository.count());
     }
 
     @Test
